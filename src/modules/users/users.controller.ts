@@ -16,10 +16,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
-  userService: UsersService;
-  constructor() {
-    this.userService = new UsersService();
-  }
+  constructor(private readonly userService: UsersService) {}
 
   @Get(':isMarried')
   getUsers(

@@ -1,9 +1,10 @@
-import { Module } from "@nestjs/common";
-import { UsersModule } from "./users/users.module";
-import { TweetModule } from "./tweet/tweet.module";
+import { Module } from '@nestjs/common';
+import { UsersModule } from './modules/users/users.module';
+import { TweetModule } from './modules/tweet/tweet.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
-  imports: [UsersModule, TweetModule],
+  imports: [UsersModule, TweetModule, AuthModule],
   controllers: [],
   providers: [],
 })
