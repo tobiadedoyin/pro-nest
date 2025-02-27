@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import {
   IsEmail,
-  IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -9,22 +8,26 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
-  @IsInt()
-  id: number;
+  @IsString()
+  @MinLength(3)
+  @IsNotEmpty({ message: 'name cannot be empty' })
+  firstName: string;
 
   @IsString()
   @MinLength(3)
   @IsNotEmpty({ message: 'name cannot be empty' })
-  name: string;
+  lastName: string;
 
-  @IsString()
+  @IsNotEmpty()
   @IsEmail()
   email: string;
 
   @IsString()
+  @MinLength(8)
+  @IsNotEmpty({ message: 'password cannot be empty' })
+  password: string;
+
+  @IsString()
   @IsOptional()
   gender: string;
-
-  @IsOptional()
-  isMarried: boolean;
 }

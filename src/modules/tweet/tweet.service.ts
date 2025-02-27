@@ -10,22 +10,5 @@ export class TweetService {
     { text: 'How are you?', date: new Date('2024-01-11'), userId: 1 },
   ];
 
-  getUserTweet(userId: number) {
-    const user = this.userService.getUsersById(userId);
-    if (!user) {
-      throw new Error(`User with id ${userId} not found.`);
-    }
-    const userName = user.name;
-    const userTweet = this.tweets.filter((tweet) => tweet.userId === userId);
-
-    const buildResponse = {
-      userName,
-      tweets: userTweet.map((tweet) => ({
-        text: tweet.text,
-        date: tweet.date,
-      })),
-    };
-
-    return buildResponse;
-  }
+  getUserTweet() {}
 }

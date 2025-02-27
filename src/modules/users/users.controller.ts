@@ -26,9 +26,6 @@ export class UsersController {
   ) {
     console.log('isMarried', param);
     console.log('limit', limit, page);
-    return this.userService
-      .getAllUsers()
-      .filter((u) => u.isMarried === param.isMarried);
   }
 
   @Get(':id')
