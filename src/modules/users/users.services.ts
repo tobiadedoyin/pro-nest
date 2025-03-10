@@ -8,5 +8,5 @@ export class UsersService {
   constructor(@InjectRepository(User) private userRepo: Repository<User>) {}
   getAllUsers() {}
 
-  getUsersById(id: number) {}
+  getUsersById() {}
 }
