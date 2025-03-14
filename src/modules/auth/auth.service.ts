@@ -11,12 +11,14 @@ import { User } from '../../database/entity/user.entity';
 import { hashPassword, verifyPassword } from '../../utility/hashing.util';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
     private jwtService: JwtService,
+    private configService: ConfigService,
   ) {}
 
   // User Registration (/auth/register) - Creating a new user account
@@ -70,14 +72,15 @@ export class AuthService {
       role: existingUser.role,
       sub: existingUser.user_id,
     };
-    const token = this.jwtService.sign(payload, { expiresIn: '1h' });
+    const token = this.jwtService.sign(payload, {
+      expiresIn: this.configService.get<string>('JWT_EXPIRES'),
+    });
 
     return {
       accessToken: token,
       user: { id: existingUser.user_id, email: existingUser.email },
     };
   }
-  // Token Refresh (/auth/refresh) - Refreshing expired JWT tokens
   // Password Reset (/auth/reset-password) - Handling password resets
   // User Logout (/auth/logout) - Invalidating a user session
   //  Me (/auth/me) - Fetching authenticated user details
